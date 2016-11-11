@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Dirlist</title>
+
+    <link rel="stylesheet" href="../styles/dirList.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap-theme.css">
+
+    <script src="../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../bower_components/file-saver/FileSaver.js"></script>
+    <script src="../../bower_components/angular/angular.js"></script>
+    <script src="../../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../../bower_components/angular-route/angular-route.js"></script>
+    <script src="../../bower_components/angular-base64/angular-base64.js"></script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../scripts/dirApp.js"></script>
+    <script src="../scripts/dirService.js"></script>
+    <script src="../scripts/dirController.js"></script>
+    <meta charset="utf-8">
+</head>
+
+<body ng-app="dirApp" class="ng-cloak">
+<div class="container dir-list-container" ng-controller="dirController as ctrl">
+
+    <div class="col-md-10 col-md-offset-1">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <tr ng-repeat="path in ctrl.files">
+                    <td class="text-center"><span
+                            class="glyphicon {{path.type === 'DIRECTORY' ? 'glyphicon-folder-close' : 'glyphicon-file'}}"></span>
+                    </td>
+                    <td>{{path.name}}</td>
+                    <td>
+                        <button class="btn btn-primary btn-xs" ng-show="{{path.extractionSupported}}"
+                                ng-click="extract(path.path)">Extract</button>
+                    </td>
+                    <td class="text-center">
+                        <a href="{{path.dlUrl}}" target="_blank">Download</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!--<ul ng-repeat="u in ctrl.files | filter : {'type' : 'DIRECTORY'}">-->
+    <!--<li class="glyphicon glyphicon-folder-close"><a href="{{u.path}}"-->
+    <!--target="_self">{{u.name}}</a></li>-->
+    <!--</ul>-->
+    <!--<ul ng-repeat="u in ctrl.files | filter : {'type' : 'FILE'}">-->
+    <!--<li class="glyphicon glyphicon-file"><a href="{{u.path}}" target="_self">{{u.name}}</a>-->
+    <!--<button class="btn btn-primary btn-xs" type="button" ng-click="extract(u.path)"-->
+    <!--ng-show="{{u.archiveType}}">Extract-->
+    <!--</button>-->
+    <!--</li>-->
+    <!--</ul>-->
+</div>
+</body>
+</html>

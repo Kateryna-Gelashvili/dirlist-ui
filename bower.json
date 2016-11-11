@@ -1,0 +1,31 @@
+{
+  "name": "dirlist-ui",
+  "authors": [
+    "Kateryna-Gelashvili <katuwa_20.04@mail.ru>"
+  ],
+  "description": "Dirlist UI",
+  "main": "",
+  "keywords": [
+    "dirlist"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-resource": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "file-saver": "^1.3.3",
+    "angular-base64": "^2.0.5",
+    "angular-bootstrap-nav-tree": "*",
+    "bootstrap-treeview": "^1.2.0"
+  }
+}
