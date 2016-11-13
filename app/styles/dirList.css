@@ -1,3 +1,11 @@
-/*.dir-list-container .treeview span.icon {*/
-    /*margin-right: 15px;*/
-/*}*/
+.dir-list-container .glyphicon {
+    padding-right: 5px;
+}
+
+.dir-list-container .glyphicon-folder-close {
+    color: goldenrod;
+}
+
+.dir-list-container .glyphicon-file {
+    color: cornflowerblue;
+}
