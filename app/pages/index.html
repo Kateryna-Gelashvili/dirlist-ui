@@ -3,14 +3,16 @@
 <head>
     <title>Dirlist</title>
 
-    <link rel="stylesheet" href="../styles/dirList.css">
     <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../styles/dirList.css">
+    <link rel="stylesheet" href="../styles/animations.css">
 
     <script src="../../bower_components/jquery/dist/jquery.js"></script>
     <script src="../../bower_components/file-saver/FileSaver.js"></script>
     <script src="../../bower_components/angular/angular.js"></script>
     <script src="../../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../../bower_components/angular-animate/angular-animate.js"></script>
     <script src="../../bower_components/angular-route/angular-route.js"></script>
     <script src="../../bower_components/angular-base64/angular-base64.js"></script>
     <script src="../../bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -25,7 +27,7 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
-                <tr ng-repeat="path in ctrl.data | filter: { visible: true }">
+                <tr class="table-row" ng-repeat="path in ctrl.data | filter: { visible: true }">
                     <td ng-if="path.type === 'DIRECTORY'">
                         <span style="padding-left: {{25*path.depth}}px"
                               class="glyphicon glyphicon-folder-close"></span>
