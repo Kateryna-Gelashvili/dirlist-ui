@@ -9,3 +9,7 @@
 .dir-list-container .glyphicon-file {
     color: cornflowerblue;
 }
+
+.dir-list-container .extract-btn {
+    width: 100%;
+}
