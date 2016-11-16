@@ -1,3 +1,8 @@
+.dir-list-container {
+    margin-top:50px;
+    margin-bottom: 50px;
+}
+
 .dir-list-container .download-column {
     max-width:100px;
     width:100px;

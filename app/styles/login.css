@@ -25,13 +25,13 @@ body {
 .form-signin .form-control:focus {
     z-index: 2;
 }
-.form-signin input .username {
-    margin-bottom: -1px;
+.form-signin .username {
+    margin-bottom: 15px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
-.form-signin input .password {
-    margin-bottom: 10px;
+.form-signin .password {
+    margin-bottom: 25px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
