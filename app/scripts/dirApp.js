@@ -1,6 +1,6 @@
 'use strict';
 
-var dirApp = angular.module('dirApp', ['ngResource', 'ngRoute', 'base64', 'ngToast'],
+var dirApp = angular.module('dirApp', ['ngResource', 'ngAnimate', 'ngRoute', 'base64', 'ngToast'],
     function ($locationProvider) {
         $locationProvider.html5Mode({
             enabled: true,
@@ -34,7 +34,7 @@ var dirApp = angular.module('dirApp', ['ngResource', 'ngRoute', 'base64', 'ngToa
         });
     }]);
 
-dirApp.constant('dirlistConfig', {backendUrl: "http://localhost:8080/utku/"});
+dirApp.constant('dirlistConfig', {backendUrl: "https://dirlist.zbfl.tk/"});
 
 dirApp.filter('encodeURIComponent', function () {
     return window.encodeURIComponent;

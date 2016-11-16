@@ -1,5 +1,5 @@
 .table-row.ng-enter, .table-row.ng-move {
-    animation: 0.5s appear;
+    animation: 0.2s appear;
 }
 
 .table-row.ng-leave {
