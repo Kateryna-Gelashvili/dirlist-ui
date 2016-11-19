@@ -7,11 +7,15 @@ var dirApp = angular.module('dirApp', ['ngResource', 'ngAnimate', 'ngRoute', 'ba
             requireBase: false
         });
     })
-    .service('authInterceptor', function ($q) {
+    .constant('dirlistConfig', {
+        backendUrl: "https://dirlist.zbfl.tk/",
+        authKey: "dirlist-auth"
+    })
+    .service('authInterceptor', function ($q, dirlistConfig) {
         var service = this;
 
         service.request = function (config) {
-            var auth = window.localStorage.getItem('auth');
+            var auth = window.localStorage.getItem(dirlistConfig.authKey);
             if (auth && config) {
                 config.headers.Authorization = 'Basic ' + auth;
             }
@@ -33,8 +37,6 @@ var dirApp = angular.module('dirApp', ['ngResource', 'ngAnimate', 'ngRoute', 'ba
             animation: 'slide'
         });
     }]);
-
-dirApp.constant('dirlistConfig', {backendUrl: "https://dirlist.zbfl.tk/"});
 
 dirApp.filter('encodeURIComponent', function () {
     return window.encodeURIComponent;

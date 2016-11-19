@@ -10,7 +10,7 @@ dirApp.controller('LoginController', ['$scope', '$http', '$base64', 'ngToast', '
                 },
                 ignore401: true
             }).success(function (response) {
-                window.localStorage.setItem('auth', auth);
+                window.localStorage.setItem(dirlistConfig.authKey, auth);
                 window.location = 'index.html';
             }).error(function () {
                 ngToast.create({
