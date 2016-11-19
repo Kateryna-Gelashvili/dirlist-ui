@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../styles/animations.css">
     <link rel="icon" type="image/x-icon" href="../pictures/favicon.ico">
 
+    <script src="../../bower_components/blueimp-md5/js/md5.js"></script>
     <script src="../../bower_components/jquery/dist/jquery.js"></script>
     <script src="../../bower_components/angular/angular.js"></script>
     <script src="../../bower_components/angular-resource/angular-resource.js"></script>
@@ -43,8 +44,25 @@
                     </td>
 
                     <td class="extract-column">
-                        <button class="extract-btn btn btn-primary btn-xs" ng-show="path.extractionSupported"
-                                ng-click="extract(path.path)">Extract</button>
+                        <div ng-show="path.extractionSupported">
+                            <button class="extract-btn btn btn-primary btn-xs"
+                                    ng-show="this['extractionStatus_' + path.id] === 'ready-to-extract'"
+                                    ng-click="extract(path)">Extract
+                            </button>
+                            <div class="progress" ng-show="this['extractionStatus_' + path.id] === 'in-progress'">
+                                <div class="progress-bar progress-bar-warning progress-bar-striped active"
+                                     role="progressbar"
+                                     aria-valuenow="{{this['extractionProgress_' +  path.id]}}"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{{this['extractionProgress_' +  path.id]}}%">
+                                    <span class="sr-only">45% Complete</span>
+                                </div>
+                            </div>
+
+                            <button class="extract-btn btn btn-success btn-xs"
+                                    ng-show="this['extractionStatus_' + path.id] === 'extracted'" disabled >Extracted
+                            </button>
+                        </div>
                     </td>
                     <td class="download-column text-center">
                         <a ng-href="{{path.dlUrl}}" target="_blank">Download</a>

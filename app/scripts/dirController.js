@@ -1,16 +1,5 @@
 'use strict';
 
-function guid() {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-}
-
 function postProcessPath(backendUrl, parentPath, childPath) {
     var normalizedPath = childPath.path.charAt(childPath.path.length - 1) === '/' ?
         childPath.path.substring(0, childPath.path.length - 1) : childPath.path;
@@ -31,6 +20,8 @@ function postProcessPath(backendUrl, parentPath, childPath) {
     }
 
     childPath.visible = true;
+
+    childPath.id = md5(childPath.path);
 
     return childPath;
 }
@@ -72,14 +63,38 @@ function findAllChildren(data, parent) {
     return findChildrenRecusively(data, parent, []);
 }
 
+function updateProgressForExtraction(backendUrl, $scope, $http, pathId, extractionId) {
+    $http.get(backendUrl + 'extractionProgress/' + extractionId)
+        .success(function (response) {
+            var extractedSize = response.extractedSize;
+            var totalSize = response.totalSize;
+            $scope['extractionProgress_' + pathId] = (extractedSize / totalSize) * 100;
+            if (extractedSize < totalSize) {
+                setTimeout(function () {
+                    updateProgressForExtraction(backendUrl, $scope, $http, pathId, extractionId);
+                }, 1000);
+            } else {
+                $scope['extractionStatus_' + pathId] = 'extracted';
+                $scope.$apply();
+            }
+    });
+}
+
+
 dirApp.controller('dirController',
     ['$q', '$http', '$scope', '$location', '$window', 'dirlistConfig',
         function ($q, $http, $scope, $location, $window, dirlistConfig) {
             var self = this;
 
             $scope.extract = function (path) {
-                $http.post(dirlistConfig.backendUrl + 'extract', {path: path}).success(function () {
-                    $scope.list();
+                $scope['extractionStatus_' + path.id] = 'in-progress';
+                $http.post(dirlistConfig.backendUrl + 'extract', {path: path.path}).success(function (response) {
+                    // path.extractionId = response.id;
+
+                    updateProgressForExtraction(dirlistConfig.backendUrl, $scope, $http, path.id, response.id);
+
+                    // todo set initial progress of the progressbar
+                    // $scope.list();
                 });
             };
 
@@ -115,6 +130,10 @@ dirApp.controller('dirController',
                             .then(function (response) {
                                 var transformedData = response.data.map(function (obj) {
                                     return postProcessPath(dirlistConfig.backendUrl, path, obj);
+                                });
+
+                                transformedData.forEach(function (transformedPath) {
+                                    $scope['extractionStatus_' + transformedPath.id] = 'ready-to-extract';
                                 });
 
                                 if (!path) {
