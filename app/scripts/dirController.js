@@ -77,7 +77,7 @@ function updateProgressForExtraction(backendUrl, $scope, $http, pathId, extracti
                 $scope['extractionStatus_' + pathId] = 'extracted';
                 $scope.$apply();
             }
-    });
+        });
 }
 
 
@@ -89,12 +89,7 @@ dirApp.controller('dirController',
             $scope.extract = function (path) {
                 $scope['extractionStatus_' + path.id] = 'in-progress';
                 $http.post(dirlistConfig.backendUrl + 'extract', {path: path.path}).success(function (response) {
-                    // path.extractionId = response.id;
-
                     updateProgressForExtraction(dirlistConfig.backendUrl, $scope, $http, path.id, response.id);
-
-                    // todo set initial progress of the progressbar
-                    // $scope.list();
                 });
             };
 

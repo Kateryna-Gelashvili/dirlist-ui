@@ -8,7 +8,7 @@ var dirApp = angular.module('dirApp', ['ngResource', 'ngAnimate', 'ngRoute', 'ba
         });
     })
     .constant('dirlistConfig', {
-        backendUrl: "http://localhost:8080/utku/",
+        backendUrl: "https://dirlist.zbfl.tk/",
         authKey: "dirlist-auth"
     })
     .service('authInterceptor', function ($q, dirlistConfig) {
