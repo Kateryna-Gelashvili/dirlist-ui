@@ -29,3 +29,6 @@
     color: cornflowerblue;
 }
 
+.dir-list-container .progress {
+    margin-bottom: 0;
+}

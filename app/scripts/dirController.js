@@ -45,7 +45,7 @@ function findChildren(data, parent) {
     return result;
 }
 
-function findChildrenRecusively(data, parent, result) {
+function findChildrenRecursively(data, parent, result) {
     var children = findChildren(data, parent);
 
     children.forEach(function (child) {
@@ -53,14 +53,14 @@ function findChildrenRecusively(data, parent, result) {
     });
 
     for (var i = 0; i < children.length; i++) {
-        findChildrenRecusively(data, children[i], result);
+        findChildrenRecursively(data, children[i], result);
     }
 
     return result;
 }
 
 function findAllChildren(data, parent) {
-    return findChildrenRecusively(data, parent, []);
+    return findChildrenRecursively(data, parent, []);
 }
 
 function updateProgressForExtraction(backendUrl, $scope, $http, pathId, extractionId) {
@@ -77,6 +77,11 @@ function updateProgressForExtraction(backendUrl, $scope, $http, pathId, extracti
                 $scope['extractionStatus_' + pathId] = 'extracted';
                 $scope.$apply();
             }
+        })
+        .error(function (error) {
+            setTimeout(function () {
+                updateProgressForExtraction(backendUrl, $scope, $http, pathId, extractionId);
+            }, 1000);
         });
 }
 

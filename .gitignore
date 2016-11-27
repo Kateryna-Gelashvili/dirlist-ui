@@ -1,5 +1,8 @@
 /bower_components
+/node_modules
 
 # IDE
 *.iml
 /.idea
+
+/dist
